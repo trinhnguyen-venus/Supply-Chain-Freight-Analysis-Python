@@ -1,145 +1,113 @@
-# Supply Chain Performance & Freight Cost Analysis
+# 🚚 Supply Chain Performance & Freight Cost Analysis
 
-This repository contains an exploratory analysis of the **SCMS Delivery History Dataset**, focusing on shipment modes, lead times, on-time delivery, and freight cost efficiency.
+## 1. Project Context
 
+This project analyzes historical supply chain and logistics data to evaluate delivery reliability and freight cost efficiency across different shipment modes, countries, and time periods.
 
-## Executive Summary
-Key insights:
-- **Air freight dominates** shipments (>60%) and costs, showing strong reliance on speed but at a premium.
-- **Air freight dominates** shipments (>60%) and costs, showing strong reliance on speed but at a premium.
-- **Trucking is cost-efficient**, carrying ~30% of orders while contributing only 22% of costs.
-- **Air Charter is expensive**, handling just 6.5% of shipments but 13% of costs, mostly for urgent cases.
-- **On-time delivery varies by region and vendor**, with several areas showing frequent delays.
-- **Freight cost per kilogram differs significantly by shipment mode and region**, pointing to optimization opportunities.
+**Business problem:**
 
-These findings highlight the trade-offs between speed, cost, and reliability in logistics operations.
+Logistics teams need to balance timely delivery with transportation cost efficiency, particularly in global supply chains where lead times and freight costs vary significantly by region and shipment mode.
 
-## Repository Structure
+The analysis is designed as a decision-support project, similar to what a Data Analyst or Operations Analyst would deliver to logistics managers or supply chain stakeholders.
 
-## Data
+## 2. Dataset Overview
 
-- Source: SCMS **Delivery** History Dataset (link to original dataset [here](https://www.kaggle.com/datasets/apoorvwatsky/supply-chain-shipment-pricing-data)).  
+The dataset contains shipment-level logistics records, including:
 
-- Large files are not committed to this repository.  
+- Purchase order and delivery timelines
+- Shipment mode and fulfillment method
+- Shipment weight and freight cost
+- Country-level delivery information
 
-- Please place the dataset under `data/` before running the notebook.
----
+Raw data was sourced from a public supply chain dataset and cleaned, standardized, and validated before analysis.
 
 
-## Key Analyses & Visuals
+## 3. Business Questions
 
+- How reliable is delivery performance across shipments?
+- How consistent are lead times across countries and shipment modes?
+- Which shipment modes drive higher freight cost efficiency?
+- What trade-offs exist between delivery reliability and freight cost?
+- Are there specific regions or shipment modes that represent operational bottlenecks?
 
+## 4. Key Findings & Insights
+### 4.1 Delivery reliability is generally strong, but lead time variability remains high
 
-### 1. Shipment Mode – Volume & Cost Share
+- Approximately 89% of shipments are delivered on time.
+- However, lead time distribution shows substantial dispersion.
+- The median lead time is around three months, with a wide interquartile range, indicating inconsistent delivery durations.
 
-**Shipment volume by transportation mode**
+**Insight:**
 
-- Air accounts for over 60% of shipments, underlining its role as the primary mode.
+On-time delivery performance alone does not guarantee predictable logistics operations. Improving lead time consistency may be as important as improving delivery speed.
 
-- Trucking follows with ~28%, essential for domestic and last-mile delivery.
+![Lead Time Distribution](Images/lead_time_distribution.png)
+![On-time Delivery Rate by Shipment Mode](Images/on_time_by_shipment_mode.png)
 
-- Ocean freight remains limited at 3.7%, typically used for bulk or oversized cargo.
+### 4.2 Shipment mode is the primary driver of cost efficiency
 
-**Freight cost share by transportation mode**
+- Air shipments incur the highest freight cost per kilogram.
+- Truck and ocean shipments provide significantly better cost efficiency.
+- Air Charter shipments show high cost variability, likely driven by consolidation size and routing.
 
-- Air also leads in cost (>60%), consistent with its volume share and high unit price.
+**Insight:**
 
-- Trucking, with nearly 30% of orders, makes up only 21.7% of costs, proving its cost efficiency.
+Shipment mode selection represents the strongest lever for balancing cost efficiency and delivery urgency.
 
-- Air Charter drives 13% of costs with just 6.5% of shipments, showing its premium use in urgent situations.
+![image](Images/freight_cost_per_kg_by_shipment_mode.png)
 
-- Ocean freight costs remain small (~4%), in line with its limited usage.
+### 4.3 Clear trade-off between delivery reliability and freight cost
 
-![Shipment Mode Cost](Images/Shipment_Mode_Analysis_by_Cost.png)
+- Higher-cost shipment modes generally achieve better on-time performance.
+- Lower-cost modes are used selectively, likely when delivery urgency is lower.
 
-![Shipment Mode by Number of Order](Images/Shipment_Mode_Analysis_by_Number_of_Order.png)
+**Insight:**
 
----
+The logistics network prioritizes delivery reliability over cost minimization, which aligns with the mission-critical nature of the shipments.
 
+![image](Images/freight_cost_per_kg_by_shipment_mode.png)
+![image](images/on_time_by_shipment_mode.png)
 
+### 4.4 Geographic differences reveal structural constraints
 
-### 2. Lead Time Analysis
-**By country**
+- Median lead time varies significantly by country.
+- Some destinations consistently experience longer delivery cycles.
 
-- Lead times vary widely. Sierra Leone, Benin, and Kazakhstan average under 50 days, while Pakistan and Guatemala reach 200–300 days.
+**Insight:**
 
-- Differences likely reflect infrastructure quality, customs processes, and distance.
+Country-level performance differences likely reflect infrastructure, customs complexity, and regional logistics capacity rather than execution issues alone.
 
-**By top 10 vendors**
+![image](images/median_lead_time_by_country.png)
 
-- Vendors differ significantly. S. Buys Wholesaler averages ~35 days, while CIPLA Limited exceeds 140 days.
+## 5. Recommendations
 
-- Others, such as Pharmacy Direct and Orgenics Ltd, cluster between 85–100 days.
+**1. Align shipment mode selection with procurement urgency**
+    Reduce over-reliance on air freight for purchase orders with flexible delivery timelines. Procurement plans should explicitly distinguish between time-critical and non-critical orders to avoid unnecessary premium freight costs.
 
-**By shipment mode**
+**2. Leverage trucking for regional and replenishment shipments**
+    Expand the use of truck transportation for regional deliveries and routine replenishment orders where lead time tolerance is higher. This can provide immediate cost control without compromising service levels.
 
-- Ocean: ~175 days, the slowest.
+**3. Restrict Air Charter usage to exceptional cases**
+    Limit air charter shipments to urgent or high-risk scenarios where standard air freight cannot meet delivery requirements. Air charter should be treated as a contingency option rather than a default mode.
 
-- Air: ~110 days.
+**4. Increase ocean freight utilization for bulk and low-priority orders**
+    For large-volume or low-priority procurement, ocean freight should be planned earlier in the production and procurement cycle to take advantage of its cost efficiency while managing longer lead times.
 
-- Air Charter: ~80 days, faster than air but still moderate.
+**5. Incorporate lead time variability into supplier and production planning**
+    Review vendors and regions with consistently long or highly variable lead times. Production schedules and safety stock levels should account for this variability to reduce downstream delivery pressure and last-minute freight escalation.
 
-- Truck: ~55 days, the quickest, ideal for short-distance or domestic routes.
 
-![Lead Time by Country](Images/Lead_Time_Analysis_by_Country.png)
+## 6. Skills & Tools
 
-![Lead Time by Vendor](Images/Lead_Time_Analysis_by_Vendor.png)
+- Python (pandas, matplotlib)
+- Data cleaning and validation
+- Exploratory data analysis
+- KPI design and performance analysis
+- Business-focused analytical storytelling
 
-![Lead Time by Mode](Images/Lead_Time_Analysis_by_Shipmode.png)
+## Author
+**Trinh Nguyen**  
 
----
-### 3. On-time Delivery
+📧 Contact: ng.trinh3023@gmail.com
 
-The on-time rate shows consistent room for improvement.
-
-Trucking achieves relatively higher reliability than air and ocean.
-
-Certain vendors and regions report frequent delays, suggesting weak points in planning or execution.
-
-Improvements in scheduling and coordination could raise overall service levels.
-
----
-### 4. Freight Cost per Kilogram
-Costs differ sharply across modes:
-
-*   Air and Air Charter are most expensive per kg.
-*   Trucking is the lowest-cost option.
-*   Ocean lies in the middle, suited for heavy but less urgent cargo.
-
-![Freight Cost per Kg Distribution](Images/Freight_Cost_Analysis_Distribution.png)
-![Freight Cost per Kg by Mode](Images/Freight_Cost_Analysis_by Shipmode.png)
-![Freight Cost vs Weight Relation per Kg](Images/Freight_Cost_Relations.png)
-
----
-
-
-## Conclusion & Recommendations
-
-This analysis confirms clear trade-offs between **volume, cost, and timeliness**:  
-
-- **Air freight** ensures speed but comes with high costs → best for critical shipments.  
-
-- **Trucking** is cost-efficient → maximize for domestic/non-urgent deliveries.  
-
-- **Air Charter** is disproportionately expensive → keep for emergencies only.  
-
-- **Ocean freight** could be expanded for bulk, low-priority orders.
-  
-**Recommendations:**  
-
-1. Rebalance orders between **Air and Truck** to reduce costs.  
-
-2. Improve **on-time performance** with stronger vendor coordination.  
-
-3. Investigate **regional bottlenecks** behind delays.  
-
-4. Increase **use of Ocean freight** where possible.  
-
----
-
-## 👤 Author
-Trinh Nguyen
-ng.trinh3023@gmail.com
-
-
-
+📍 GitHub: [https://trinhnguyen-venus.github.io/](https://trinhnguyen-venus.github.io/)
