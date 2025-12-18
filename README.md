@@ -66,7 +66,8 @@ Shipment mode selection represents the strongest lever for balancing cost effici
 The logistics network prioritizes delivery reliability over cost minimization, which aligns with the mission-critical nature of the shipments.
 
 ![image](Images/freight_cost_per_kg_by_shipment_mode.png)
-![image](images/on_time_by_shipment_mode.png)
+
+![image](Images/on_time_by_shipment_mode.png)
 
 ### 4.4 Geographic differences reveal structural constraints
 
@@ -77,7 +78,7 @@ The logistics network prioritizes delivery reliability over cost minimization, w
 
 Country-level performance differences likely reflect infrastructure, customs complexity, and regional logistics capacity rather than execution issues alone.
 
-![image](images/median_lead_time_by_country.png)
+![image](Images/median_lead_time_by_country.png)
 
 ## 5. Recommendations
 
